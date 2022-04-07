@@ -71,9 +71,9 @@ namespace FlowerShop
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(159, 251);
+            this.label5.Location = new System.Drawing.Point(157, 250);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(150, 17);
+            this.label5.Size = new System.Drawing.Size(149, 16);
             this.label5.TabIndex = 13;
             this.label5.Text = "Восстановить пароль";
             this.label5.Click += new System.EventHandler(this.label5_Click);
@@ -83,7 +83,7 @@ namespace FlowerShop
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(169, 224);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(118, 17);
+            this.label4.Size = new System.Drawing.Size(118, 16);
             this.label4.TabIndex = 12;
             this.label4.Text = "Создать аккаунт";
             this.label4.Click += new System.EventHandler(this.label4_Click);

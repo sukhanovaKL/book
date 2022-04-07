@@ -38,7 +38,8 @@ namespace FlowerShop
                         if (listBox1.SelectedItem.ToString() == flowers.name_t && flowers.type == "book")
                         {
                             pictureBox1.Image = (Image)(Image)((new ImageConverter()).ConvertFrom(flowers.photo));
-                            label4.Text = "Количество товара: " + flowers.sum; ;
+                            label4.Text = "Количество товара: " + flowers.sum;
+                            label2.Text = "Цена: " + flowers.price;
                         }
                     }
                 }

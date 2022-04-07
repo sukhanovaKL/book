@@ -39,6 +39,7 @@ namespace FlowerShop
                         {
                             pictureBox1.Image = (Image)(Image)((new ImageConverter()).ConvertFrom(byket.photo));
                             label4.Text = "Количество товара: " + byket.sum;
+                            label2.Text = "Цена: " + byket.price;
                         }
                     }
                 }
