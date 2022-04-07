@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowerShop", "FlowerShop\FlowerShop.csproj", "{07C87495-66D0-437E-96B7-E7505E5F6072}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_PiTPM", "Test_PiTPM\Test_PiTPM.csproj", "{9345BA38-3B94-42EF-BD45-A61E6F4C3F53}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07C87495-66D0-437E-96B7-E7505E5F6072}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07C87495-66D0-437E-96B7-E7505E5F6072}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07C87495-66D0-437E-96B7-E7505E5F6072}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07C87495-66D0-437E-96B7-E7505E5F6072}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9345BA38-3B94-42EF-BD45-A61E6F4C3F53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9345BA38-3B94-42EF-BD45-A61E6F4C3F53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9345BA38-3B94-42EF-BD45-A61E6F4C3F53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9345BA38-3B94-42EF-BD45-A61E6F4C3F53}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F8FF50EB-87EC-4343-8DEA-B94EEBBEED1A}
+	EndGlobalSection
+EndGlobal

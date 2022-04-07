@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="Users" EntityType="Model1.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ColleagueSet" EntityType="Model1.Store.ColleagueSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Clients" EntityType="Model1.Store.Clients" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderSet" EntityType="Model1.Store.OrderSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderTovarSet" EntityType="Model1.Store.OrderTovarSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TovarSet" EntityType="Model1.Store.TovarSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ColleagueUser" Association="Model1.Store.ColleagueUser">
+      <End Role="Colleague" EntitySet="ColleagueSet" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="ClientUser" Association="Model1.Store.ClientUser">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="OrderClient" Association="Model1.Store.OrderClient">
+      <End Role="Order" EntitySet="OrderSet" />
+      <End Role="Client" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="OrderOrderTovar" Association="Model1.Store.OrderOrderTovar">
+      <End Role="Order" EntitySet="OrderSet" />
+      <End Role="OrderTovar" EntitySet="OrderTovarSet" />
+    </AssociationSet>
+    <AssociationSet Name="TovarOrderTovar" Association="Model1.Store.TovarOrderTovar">
+      <End Role="Tovar" EntitySet="TovarSet" />
+      <End Role="OrderTovar" EntitySet="OrderTovarSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Role" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Colleague_Id" Type="int" Nullable="true" />
+    <Property Name="Client_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ColleagueSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="surname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="patronymic" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="post" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="money" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="surname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="patronymic" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="photo" Type="varbinary(max)" Nullable="false" />
+    <Property Name="money" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="data" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="isObrabotan" Type="bit" Nullable="true" DefaultValue="false" />
+    <Property Name="price" Type="int" Nullable="false" />
+    <Property Name="Client_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="OrderTovarSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sum" Type="int" Nullable="false" />
+    <Property Name="Order_Id" Type="int" Nullable="true" />
+    <Property Name="Tovar_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TovarSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name_t" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="sum" Type="int" Nullable="false" />
+    <Property Name="type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="price" Type="int" Nullable="false" />
+    <Property Name="photo" Type="varbinary(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="ColleagueUser">
+    <End Role="Colleague" Type="Model1.Store.ColleagueSet" Multiplicity="0..1" />
+    <End Role="User" Type="Model1.Store.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Colleague">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="Colleague_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClientUser">
+    <End Role="Client" Type="Model1.Store.Clients" Multiplicity="0..1" />
+    <End Role="User" Type="Model1.Store.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="Client_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrderClient">
+    <End Role="Order" Type="Model1.Store.OrderSet" Multiplicity="*" />
+    <End Role="Client" Type="Model1.Store.Clients" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="Client_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrderOrderTovar">
+    <End Role="Order" Type="Model1.Store.OrderSet" Multiplicity="0..1" />
+    <End Role="OrderTovar" Type="Model1.Store.OrderTovarSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderTovar">
+        <PropertyRef Name="Order_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TovarOrderTovar">
+    <End Role="Tovar" Type="Model1.Store.TovarSet" Multiplicity="0..1" />
+    <End Role="OrderTovar" Type="Model1.Store.OrderTovarSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tovar">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderTovar">
+        <PropertyRef Name="Tovar_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="Model1.User" />
+          <EntitySet Name="ColleagueSet" EntityType="Model1.Colleague" />
+          <EntitySet Name="Clients" EntityType="Model1.Client" />
+          <EntitySet Name="OrderSet" EntityType="Model1.Order" />
+          <EntitySet Name="OrderTovarSet" EntityType="Model1.OrderTovar" />
+          <EntitySet Name="TovarSet" EntityType="Model1.Tovar" />
+          <AssociationSet Name="ColleagueUser" Association="Model1.ColleagueUser">
+            <End Role="Colleague" EntitySet="ColleagueSet" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="ClientUser" Association="Model1.ClientUser">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="OrderClient" Association="Model1.OrderClient">
+            <End Role="Order" EntitySet="OrderSet" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="OrderOrderTovar" Association="Model1.OrderOrderTovar">
+            <End Role="Order" EntitySet="OrderSet" />
+            <End Role="OrderTovar" EntitySet="OrderTovarSet" />
+          </AssociationSet>
+          <AssociationSet Name="TovarOrderTovar" Association="Model1.TovarOrderTovar">
+            <End Role="Tovar" EntitySet="TovarSet" />
+            <End Role="OrderTovar" EntitySet="OrderTovarSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Colleague" Relationship="Model1.ColleagueUser" FromRole="User" ToRole="Colleague" />
+          <NavigationProperty Name="Client" Relationship="Model1.ClientUser" FromRole="User" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Colleague">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="surname" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="patronymic" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="post" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="money" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Model1.ColleagueUser" FromRole="Colleague" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="surname" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="patronymic" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="photo" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="money" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Model1.ClientUser" FromRole="Client" ToRole="User" />
+          <NavigationProperty Name="Order" Relationship="Model1.OrderClient" FromRole="Client" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="data" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="isObrabotan" Type="Boolean" Nullable="true" DefaultValue="False" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Model1.OrderClient" FromRole="Order" ToRole="Client" />
+          <NavigationProperty Name="OrderTovar" Relationship="Model1.OrderOrderTovar" FromRole="Order" ToRole="OrderTovar" />
+        </EntityType>
+        <EntityType Name="OrderTovar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Order" Relationship="Model1.OrderOrderTovar" FromRole="OrderTovar" ToRole="Order" />
+          <NavigationProperty Name="Tovar" Relationship="Model1.TovarOrderTovar" FromRole="OrderTovar" ToRole="Tovar" />
+          <Property Name="sum" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tovar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_t" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="sum" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <Property Name="photo" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="OrderTovar" Relationship="Model1.TovarOrderTovar" FromRole="Tovar" ToRole="OrderTovar" />
+        </EntityType>
+        <Association Name="ColleagueUser">
+          <End Type="Model1.Colleague" Role="Colleague" Multiplicity="0..1" />
+          <End Type="Model1.User" Role="User" Multiplicity="0..1" />
+        </Association>
+        <Association Name="ClientUser">
+          <End Type="Model1.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="Model1.User" Role="User" Multiplicity="0..1" />
+        </Association>
+        <Association Name="OrderClient">
+          <End Type="Model1.Order" Role="Order" Multiplicity="*" />
+          <End Type="Model1.Client" Role="Client" Multiplicity="0..1" />
+        </Association>
+        <Association Name="OrderOrderTovar">
+          <End Type="Model1.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="Model1.OrderTovar" Role="OrderTovar" Multiplicity="*" />
+        </Association>
+        <Association Name="TovarOrderTovar">
+          <End Type="Model1.Tovar" Role="Tovar" Multiplicity="0..1" />
+          <End Type="Model1.OrderTovar" Role="OrderTovar" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ColleagueSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Colleague)">
+        <MappingFragment StoreEntitySet="ColleagueSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="surname" ColumnName="surname" />
+          <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+          <ScalarProperty Name="post" ColumnName="post" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="money" ColumnName="money" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Client)">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="surname" ColumnName="surname" />
+          <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="money" ColumnName="money" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Order)">
+        <MappingFragment StoreEntitySet="OrderSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="data" ColumnName="data" />
+          <ScalarProperty Name="isObrabotan" ColumnName="isObrabotan" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderTovarSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.OrderTovar)">
+        <MappingFragment StoreEntitySet="OrderTovarSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="sum" ColumnName="sum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TovarSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Tovar)">
+        <MappingFragment StoreEntitySet="TovarSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name_t" ColumnName="name_t" />
+          <ScalarProperty Name="sum" ColumnName="sum" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ColleagueUser" TypeName="Model1.ColleagueUser" StoreEntitySet="Users">
+      <EndProperty Name="Colleague">
+        <ScalarProperty Name="Id" ColumnName="Colleague_Id" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Colleague_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ClientUser" TypeName="Model1.ClientUser" StoreEntitySet="Users">
+      <EndProperty Name="Client">
+        <ScalarProperty Name="Id" ColumnName="Client_Id" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Client_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="OrderClient" TypeName="Model1.OrderClient" StoreEntitySet="OrderSet">
+      <EndProperty Name="Client">
+        <ScalarProperty Name="Id" ColumnName="Client_Id" />
+      </EndProperty>
+      <EndProperty Name="Order">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Client_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="OrderOrderTovar" TypeName="Model1.OrderOrderTovar" StoreEntitySet="OrderTovarSet">
+      <EndProperty Name="Order">
+        <ScalarProperty Name="Id" ColumnName="Order_Id" />
+      </EndProperty>
+      <EndProperty Name="OrderTovar">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Order_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TovarOrderTovar" TypeName="Model1.TovarOrderTovar" StoreEntitySet="OrderTovarSet">
+      <EndProperty Name="Tovar">
+        <ScalarProperty Name="Id" ColumnName="Tovar_Id" />
+      </EndProperty>
+      <EndProperty Name="OrderTovar">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Tovar_Id" IsNull="false" />
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
