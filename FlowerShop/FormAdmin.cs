@@ -88,7 +88,7 @@ namespace FlowerShop
             {
                 foreach (User user in db.Users)
                 {
-                    if (listBox1.SelectedItem.ToString() == user.Login)
+                    if (listBox2.SelectedItem.ToString() == user.Login)
                     {
                         db.ColleagueSet.Remove(user.Colleague);
                         db.Users.Remove(user);
